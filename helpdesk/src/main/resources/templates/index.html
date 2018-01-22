@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- <div th:replace="fragments/header :: head"></div> -->
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:include="fragments/header :: head"></th:block>
+
+    <title>Strona główna</title>
 </head>
 <body>
+<th:block th:replace="fragments/header :: header"></th:block>
 
+<div class="container">
+    <h3>Right Lukaszddd Navbar</h3>
+    <p>The .navbar-right class is used to right-align navigation bar buttons.</p>
+</div>
 </body>
 </html>
