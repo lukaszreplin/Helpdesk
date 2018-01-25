@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="head">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -23,10 +23,24 @@
             </li>
             <li th:class="${activeTab == 'kbase'}? 'active' : null"><a href="/knowledgeBase">Baza wiedzy</a></li>
         </ul>
+        <div  sec:authorize="!isAuthenticated()">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
+            <li th:class="${activeTab == 'register'}? 'active' : null"><a href="/register"><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
+            <li th:class="${activeTab == 'login'}? 'active' : null"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
         </ul>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>
+                <span sec:authentication="name"></span></a></li>
+            <li><a href="javascript: document.logoutForm.submit()"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>
+
+
+            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                <input type="submit" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" value="Sign Out"/>
+            </form>
+        </ul>
+        </div>
     </div>
 </nav>
 

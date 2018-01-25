@@ -10,6 +10,12 @@
 <th:block th:replace="fragments/header :: header('index')"></th:block>
 
 <div class="container">
+    <div class="alert alert-info" th:if="${logoutSuccess}">
+        <strong>Informacja: </strong> Zostałeś wylogowany z serwisu!
+    </div>
+    <div class="alert alert-success" th:if="${loginSuccess}">
+        <strong>Informacja: </strong> Zostałeś poprawnie zalogowany!
+    </div>
     <div class="jumbotron">
         <h2>HelpDesk System</h2>
         <p>System pozwala na tworzenie nowych zgłoszeń do działu obsługi, podgląd swoich zgłoszeń oraz umożliwia

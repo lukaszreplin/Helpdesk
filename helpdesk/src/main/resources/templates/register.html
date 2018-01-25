@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- <div th:replace="fragments/header :: head"></div> -->
+<head>
+    <th:block th:include="fragments/header :: head"></th:block>
+
+    <title>Rejestracja</title>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header('register')"></th:block>
+
+<div class="container">
+    <h3>Rejestracja</h3>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <form class="form-horizontal" action="/action_page.php" method="post">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="fn">Imię:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="fn" placeholder="Wpisz swoje imię" name="firstname"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="sn">Nazwisko:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="sn" placeholder="Wpisz swoje nazwisko" name="surname"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email" placeholder="Wpisz email" name="email"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="pwd">Hasło:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pwd"/>
+                    </div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label col-sm-2" for="pwd2">Powtórz hasło:</label>-->
+                    <!--<div class="col-sm-10">-->
+                        <!--<input type="password" class="form-control" id="pwd2" placeholder="Powtórz hasło" name="pwd"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Zarejestruj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>
