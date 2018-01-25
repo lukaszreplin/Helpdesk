@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- <div th:replace="fragments/header :: head"></div> -->
+<head>
+    <th:block th:include="fragments/header :: head"></th:block>
+
+    <title>Dodawanie zgłoszenia</title>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header('addticket')"></th:block>
+
+<div class="container">
+    <h3>Dodawanie nowego zgłoszenia</h3>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>
