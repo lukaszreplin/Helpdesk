@@ -7,11 +7,42 @@
     <title>Strona główna</title>
 </head>
 <body>
-<th:block th:replace="fragments/header :: header"></th:block>
+<th:block th:replace="fragments/header :: header('index')"></th:block>
 
 <div class="container">
-    <h3>Right Lukaszddd Navbar</h3>
-    <p>The .navbar-right class is used to right-align navigation bar buttons.</p>
+    <div class="jumbotron">
+        <h2>HelpDesk System</h2>
+        <p>System pozwala na tworzenie nowych zgłoszeń do działu obsługi, podgląd swoich zgłoszeń oraz umożliwia
+            przeglądanie bazy wiedzy. Wystarczy się zarejestrować!</p>
+    </div>
+    <h3>Statystyki</h3>
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Wartość</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Liczba artykułów w bazie wiedzy</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>Liczba zgłoszeń</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Liczba zgłoszeń otwartych</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Liczba zgłoszeń zamkniętych</td>
+            <td>5</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
 </html>
