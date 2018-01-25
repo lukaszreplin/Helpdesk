@@ -8,7 +8,7 @@ public class KnowledgeBaseController {
 
     @RequestMapping("/knowledgeBase")
     public String index() {
-        return "kbase";
+        return "/knowledgebase/kbase";
     }
 
 }
