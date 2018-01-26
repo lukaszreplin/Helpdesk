@@ -1,7 +1,7 @@
 package eu.replin.helpdesk.services;
 
-import eu.replin.helpdesk.Utils.Role;
-import eu.replin.helpdesk.Utils.RoleRepository;
+import eu.replin.helpdesk.utils.Role;
+import eu.replin.helpdesk.utils.RoleRepository;
 import eu.replin.helpdesk.domain.User;
 import eu.replin.helpdesk.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

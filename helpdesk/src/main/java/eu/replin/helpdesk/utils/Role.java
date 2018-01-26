@@ -1,4 +1,4 @@
-package eu.replin.helpdesk.Utils;
+package eu.replin.helpdesk.utils;
 
 import javax.persistence.*;
 

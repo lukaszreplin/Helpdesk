@@ -10,6 +10,12 @@
 <th:block th:replace="fragments/header :: header('index')"></th:block>
 
 <div class="container">
+    <div class="alert alert-success" th:if="${saveArticleSuccess}">
+        <strong>Informacja: </strong> Artykuł został zapisany poprawnie!
+    </div>
+    <div class="alert alert-success" th:if="${saveCategorySuccess}">
+        <strong>Informacja: </strong> Kategoria została zapisana poprawnie!
+    </div>
     <div class="alert alert-info" th:if="${logoutSuccess}">
         <strong>Informacja: </strong> Zostałeś wylogowany z serwisu!
     </div>

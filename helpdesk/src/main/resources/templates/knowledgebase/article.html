@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!-- <div th:replace="fragments/header :: head"></div> -->
+<head>
+    <th:block th:include="fragments/header :: head"></th:block>
+
+    <title>Baza wiedzy</title>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header('kbase')"></th:block>
+
+<div class="container">
+    <h3>Baza wiedzy - szczegóły artykułu</h3>
+    <h3 th:text="${article.title}"></h3>
+    <blockquote>
+        <p th:text="${article.content}"></p>
+    </blockquote>
+    <a href="/knowledgeBase" class="btn btn-warning" role="button">Powrót do listy</a>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

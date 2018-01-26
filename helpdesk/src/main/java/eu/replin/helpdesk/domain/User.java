@@ -1,7 +1,6 @@
 package eu.replin.helpdesk.domain;
 
-import eu.replin.helpdesk.Utils.Role;
-import org.hibernate.validator.constraints.Email;
+import eu.replin.helpdesk.utils.Role;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
