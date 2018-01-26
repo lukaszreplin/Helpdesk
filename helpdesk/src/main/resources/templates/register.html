@@ -11,31 +11,38 @@
 
 <div class="container">
     <h3>Rejestracja</h3>
+    <div th:if="${registerError}">
+        <div th:each="error : ${errorList}">
+            <div class="alert alert-danger">
+                <strong>Błąd!</strong> <span th:text="${error}"></span>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-5 col-md-offset-3">
-            <form class="form-horizontal" action="/action_page.php" method="post">
+            <form class="form-horizontal" th:object="${user}" th:action="@{/register}" method="post">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="fn">Imię:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="fn" placeholder="Wpisz swoje imię" name="firstname"/>
+                        <input type="text" class="form-control" id="fn" placeholder="Wpisz swoje imię" name="firstname" th:field="*{firstname}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="sn">Nazwisko:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="sn" placeholder="Wpisz swoje nazwisko" name="surname"/>
+                        <input type="text" class="form-control" id="sn" placeholder="Wpisz swoje nazwisko" name="surname" th:field="*{lastname}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="email">Email:</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" placeholder="Wpisz email" name="email"/>
+                        <input type="email" class="form-control" id="email" placeholder="Wpisz email" name="email" th:field="*{email}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="pwd">Hasło:</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pwd"/>
+                        <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pwd" th:field="*{password}"/>
                     </div>
                 </div>
                 <!--<div class="form-group">-->
