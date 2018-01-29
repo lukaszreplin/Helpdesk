@@ -25,7 +25,6 @@ public class Article {
     @Valid
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
-    @NotEmpty(message = "Nie wybrałeś kategorii")
     private Category category;
 
     public Article() {

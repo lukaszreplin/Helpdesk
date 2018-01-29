@@ -29,8 +29,7 @@ public class TicketService {
 
     public ArrayList<Ticket> getMyTickets() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        return ticketRepository.findByUser(currentPrincipalName);
+        return ticketRepository.findByUser(userService.findUserByEmail(authentication.getName()));
     }
 
     public ArrayList<Ticket> getAllTickets() {

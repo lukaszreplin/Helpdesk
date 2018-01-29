@@ -24,7 +24,7 @@ public class TicketController {
     @RequestMapping("/addTicket")
     public String addTicket(Model model) {
         model.addAttribute("ticket", new Ticket());
-        return "/tickets/addticket";
+        return "/tickets/addTicket";
     }
 
     @RequestMapping(value = "/addTicket", method = RequestMethod.POST)
@@ -49,21 +49,21 @@ public class TicketController {
     public String getMyTickets(Model model) {
         List<Ticket> tickets = ticketService.getMyTickets();
         model.addAttribute("tickets", tickets);
-        return "tickets/mytickets";
+        return "tickets/myTickets";
     }
 
     @RequestMapping("/manageTickets")
     public String getAllTickets(Model model) {
         List<Ticket> tickets = ticketService.getAllTickets();
         model.addAttribute("tickets", tickets);
-        return "tickets/managetickets";
+        return "tickets/manageTickets";
     }
 
     @RequestMapping("/ticket")
     public String viewArticle(@RequestParam("id") int id, Model model) {
         Ticket ticket = ticketService.getTicket(id);
         model.addAttribute("ticket", ticket);
-        return "/tickets/ticket";
+        return "/tickets/myTicket";
     }
 
 

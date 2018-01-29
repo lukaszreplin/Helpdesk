@@ -2,6 +2,7 @@ package eu.replin.helpdesk.domain.repository;
 
 
 import eu.replin.helpdesk.domain.Ticket;
+import eu.replin.helpdesk.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     public ArrayList<Ticket> findAllBySubjectIsNotNull();
 
-    public ArrayList<Ticket> findByUser(String user);
+    public ArrayList<Ticket> findByUser(User user);
 
     @Query("SELECT count(t.id) FROM Ticket t")
     int selectCountOfAll();
