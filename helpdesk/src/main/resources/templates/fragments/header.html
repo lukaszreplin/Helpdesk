@@ -22,11 +22,11 @@
                 </ul>
             </li>
             <li th:class="${activeTab == 'kbase'}? 'active' : null"><a href="/knowledgeBase">Baza wiedzy</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" th:class="${activeTab == 'addArticle' || activeTab == 'manageTickets' || activeTab == 'categories'}? 'dropdown active' : 'dropdown'"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrator <span class="caret"></span></a>
+            <li sec:authorize="hasAuthority('ADMIN')" th:class="${activeTab == 'addArticle' || activeTab == 'managetickets' || activeTab == 'categories'}? 'dropdown active' : 'dropdown'"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrator <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li th:class="${activeTab == 'addArticle'}? 'active' : null"><a href="/addArticle">Dodaj artykuł do bazy wiedzy</a></li>
                     <li th:class="${activeTab == 'categories'}? 'active' : null"><a href="/categories">Zarządzanie kategoriami artykułów</a></li>
-                    <li th:class="${activeTab == 'manageTickets'}? 'active' : null"><a href="/manageTickets">Zarządzanie zgłoszeniami</a></li>
+                    <li th:class="${activeTab == 'managetickets'}? 'active' : null"><a href="/manageTickets">Zarządzanie zgłoszeniami</a></li>
 
                 </ul>
             </li>

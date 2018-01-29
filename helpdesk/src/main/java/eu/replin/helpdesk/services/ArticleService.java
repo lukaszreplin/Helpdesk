@@ -19,7 +19,7 @@ public class ArticleService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public ArrayList<Article> getAllArticle() {
+    public ArrayList<Article> getAllArticle() { ;
         return new ArrayList<Article>(articleRepository.findAllByTitleIsNotNull());
     }
 
@@ -27,12 +27,8 @@ public class ArticleService {
         return articleRepository.findArticleById(id);
     }
 
-    public void saveArticle(Article article, int id) {
-        System.out.println("save article start");
-        Category category = categoryRepository.findById(1);
-        System.out.println("pobrano kategorię: " + category.getName());
-        article.setCategory(category);
-        System.out.println("zapisano...");
+    public void saveArticle(Article article) {
+        System.out.println("zapisano artykuł...");
         articleRepository.save(article);
     }
 
@@ -47,4 +43,10 @@ public class ArticleService {
     public void deleteArticle(int id) {
         articleRepository.deleteArticleById(id);
     }
+
+    public int getCount() {
+        return articleRepository.selectCountOfAll();
+    }
+
+
 }

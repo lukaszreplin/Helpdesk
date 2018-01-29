@@ -15,6 +15,7 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
 
     ArrayList<Article> findAllByTitleIsNotNull();
 
+
     Article findArticleById(int id);
 
     @Transactional
@@ -26,6 +27,9 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
 
     @Transactional
     int deleteArticleById(int id);
+
+    @Query("SELECT count(a.id) FROM Article a")
+    int selectCountOfAll();
 
 
 }

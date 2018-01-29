@@ -7,11 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Qualifier("dataSource")
     @Autowired
@@ -49,8 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery(usersQuery)
-                .authoritiesByUsernameQuery(rolesQuery);
+                .authoritiesByUsernameQuery(rolesQuery)
+                .passwordEncoder(bCryptPasswordEncoder);
     }
+
+
 
 
 }

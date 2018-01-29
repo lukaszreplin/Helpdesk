@@ -3,6 +3,7 @@ package eu.replin.helpdesk.domain;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 @Entity
 @Table(name = "articles")
@@ -21,8 +22,10 @@ public class Article {
     @NotEmpty(message = "Treść nie może być pusta!")
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @Valid
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    @NotEmpty(message = "Nie wybrałeś kategorii")
     private Category category;
 
     public Article() {

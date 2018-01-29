@@ -17,7 +17,7 @@ public class CategoryService {
 
 
     public ArrayList<Category> getAllCategories() {
-        return new ArrayList<Category>(categoryRepository.findAllByNameIsNotNull());
+        return categoryRepository.findAll();
     }
 
     public Category getCategory(int id) {

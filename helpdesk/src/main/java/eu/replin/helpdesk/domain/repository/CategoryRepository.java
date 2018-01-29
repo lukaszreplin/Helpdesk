@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    ArrayList<Category> findAllByNameIsNotNull();
+    ArrayList<Category> findAll();
 
     Category findByName(String name);
 

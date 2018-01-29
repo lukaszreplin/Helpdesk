@@ -10,6 +10,9 @@
 <th:block th:replace="fragments/header :: header('index')"></th:block>
 
 <div class="container">
+    <div class="alert alert-success" th:if="${saveTicketSuccess}">
+        <strong>Informacja: </strong> Artykuł został zapisany poprawnie!
+    </div>
     <div class="alert alert-success" th:if="${saveArticleSuccess}">
         <strong>Informacja: </strong> Artykuł został zapisany poprawnie!
     </div>
@@ -23,7 +26,7 @@
         <strong>Informacja: </strong> Zostałeś poprawnie zalogowany!
     </div>
     <div class="alert alert-success" th:if="${registerSuccess}">
-        <strong>Informacja: </strong> Zostałeś poprawnie zalogowany!
+        <strong>Informacja: </strong> Zostałeś poprawnie zarejestrowany!
     </div>
     <div class="jumbotron">
         <h2>HelpDesk System</h2>
@@ -41,23 +44,25 @@
         <tbody>
         <tr>
             <td>Liczba artykułów w bazie wiedzy</td>
-            <td>20</td>
+            <td th:text="${articleCounter}"></td>
         </tr>
         <tr>
             <td>Liczba zgłoszeń</td>
-            <td>6</td>
+            <td th:text="${ticketsAll}"></td>
         </tr>
         <tr>
             <td>Liczba zgłoszeń otwartych</td>
-            <td>1</td>
+            <td th:text="${ticketsOpen}"></td>
         </tr>
         <tr>
             <td>Liczba zgłoszeń zamkniętych</td>
-            <td>5</td>
+            <td th:text="${ticketsClosed}"></td>
         </tr>
         </tbody>
     </table>
+    <div align="right">Nie widać danych? <a href="/" class="btn btn-warning" role="button">Odśwież stronę</a></div>
 </div>
+
 <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <title>Baza wiedzy</title>
 </head>
 <body>
-<th:block th:replace="fragments/header :: header('kbase')"></th:block>
+<th:block th:replace="fragments/header :: header('addArticle')"></th:block>
 
 <div class="container">
     <h3 th:if="${!edit}">Baza wiedzy - dodawanie nowego artykułu</h3>
@@ -34,12 +34,12 @@
                           th:field="*{content}"></textarea>
             </div>
         </div>
-        <!--<div class="form-group">-->
-            <!--<label for="category">Kategoria:</label>-->
-            <!--<select class="form-control" id="category" th:field="*{category}">-->
-                <!--<option th:each=" category : ${categories}" th:text="${category.name}" th:value="${category}"></option>-->
-            <!--</select>-->
-        <!--</div>-->
+        <div class="form-group">
+            <label for="category">Kategoria:</label>
+            <select class="form-control" id="category" th:field="*{category.id}">
+                <option th:each=" category : ${articleCategories}" th:text="${category.name}" th:value="${category.id}"></option>
+            </select>
+        </div>
 
             <!--<tr th:each=" category : ${categories}">-->
                 <!--<td th:text="${category.name}"></td>-->

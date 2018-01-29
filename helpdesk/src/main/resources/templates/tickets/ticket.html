@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!-- <div th:replace="fragments/header :: head"></div> -->
+<head>
+    <th:block th:include="fragments/header :: head"></th:block>
+
+    <title>System zgłoszeń</title>
+</head>
+<body>
+<div sec:authorize="hasAuthority('ADMIN')">
+<th:block th:replace="fragments/header :: header('managetickets')"></th:block>
+</div>
+
+<div class="container">
+    <h3>Zgłoszenie - szczegóły</h3>
+    <h3 th:text="${ticket.subject}"></h3>
+    <blockquote>
+        <p th:text="${ticket.content}"></p>
+    </blockquote>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageTickets" class="btn btn-warning" role="button">Powrót do listy</a>
+    <a sec:authorize="hasAuthority('USER')" href="/myTickets" class="btn btn-warning" role="button">Powrót do listy</a>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

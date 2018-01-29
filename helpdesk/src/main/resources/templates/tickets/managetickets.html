@@ -7,7 +7,7 @@
     <title>System zgłoszeń</title>
 </head>
 <body>
-<th:block th:replace="fragments/header :: header('mytickets')"></th:block>
+<th:block th:replace="fragments/header :: header('managetickets')"></th:block>
 
 <div class="container">
     <h3>System zgłoszeń - moje zgłoszenia</h3>
@@ -17,6 +17,7 @@
             <th>Temat</th>
             <th>Data dodania</th>
             <th>Status</th>
+            <td>Kto założył</td>
             <th></th>
         </tr>
         </thead>
@@ -25,6 +26,7 @@
             <td th:text="${ticket.subject}"></td>
             <td th:text="${ticket.createdDate}"></td>
             <td th:text="${ticket.status == 1}? 'Otwarte' : 'Zamknięte'"></td>
+            <td th:text="${ticket.createdBy}"></td>
             <td>
                 <a class="btn btn-info" role="button" th:href="${'/ticket?id='+ticket.id}">Szczegóły</a>
             </td>

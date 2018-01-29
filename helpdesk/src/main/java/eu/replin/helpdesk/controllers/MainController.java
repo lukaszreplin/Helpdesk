@@ -1,6 +1,8 @@
 package eu.replin.helpdesk.controllers;
 
 import eu.replin.helpdesk.domain.User;
+import eu.replin.helpdesk.services.ArticleService;
+import eu.replin.helpdesk.services.TicketService;
 import eu.replin.helpdesk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +24,18 @@ public class MainController {
     @Autowired
     UserService us;
 
+    @Autowired
+    ArticleService as;
+
+    @Autowired
+    TicketService ts;
+
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("articleCounter", as.getCount());
+        model.addAttribute("ticketsAll", ts.selectCountOfAll());
+        model.addAttribute("ticketsClosed", ts.selectCountOfClose());
+        model.addAttribute("ticketsOpen", ts.selectCountOfOpen());
         return "index";
     }
 

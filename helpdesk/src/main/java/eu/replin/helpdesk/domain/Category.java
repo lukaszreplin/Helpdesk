@@ -17,13 +17,16 @@ public class Category {
     private int id;
 
     @Column(name = "name")
-    @NotEmpty(message = "Nazwa kategorii nie może być pusta!")
     private String name;
 
-    @OneToMany(mappedBy="category")
-    private List<Article> articles;
+//    @OneToMany(mappedBy="category")
+//    private List<Article> articles;
 
     public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -42,11 +45,11 @@ public class Category {
         this.name = name;
     }
 
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
-    }
+//    public List<Article> getArticles() {
+//        return articles;
+//    }
+//
+//    public void setArticles(List<Article> articles) {
+//        this.articles = articles;
+//    }
 }
