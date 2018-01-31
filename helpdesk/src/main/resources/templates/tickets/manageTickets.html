@@ -17,7 +17,7 @@
             <th>Temat</th>
             <th>Data dodania</th>
             <th>Status</th>
-            <td>Kto założył</td>
+            <th>Kto założył</th>
             <th></th>
         </tr>
         </thead>
@@ -28,7 +28,7 @@
             <td th:text="${ticket.status == 1}? 'Otwarte' : 'Zamknięte'"></td>
             <td><span th:text="${ticket.user.firstname}"></span> <span th:text="${ticket.user.lastname}"></span> </td>
             <td>
-                <a class="btn btn-info" role="button" th:href="${'/ticket?id='+ticket.id}">Szczegóły</a>
+                <a class="btn btn-info" role="button" th:href="${'/ticketDetails?id='+ticket.id}">Szczegóły</a>
             </td>
         </tr>
         </tbody>

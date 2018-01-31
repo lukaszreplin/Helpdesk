@@ -7,7 +7,7 @@
     <title>System zgłoszeń</title>
 </head>
 <body>
-    <th:block th:replace="fragments/header :: header('mytickets')"></th:block>
+    <th:block th:replace="fragments/header :: header('managetickets')"></th:block>
 
 <div class="container">
     <h3>Zgłoszenie - szczegóły</h3>
@@ -25,7 +25,7 @@
     <br/>
     <br/>
     <div th:if="${ticket.status} == '1'" id="commentForm" class="collapse">
-        <form class="form-horizontal" th:action="@{/ticket}" method="post">
+        <form class="form-horizontal" th:action="@{/ticketDetails}" method="post">
             <div class="form-group">
                 <label for="content">Treść odpowiedzi</label>
                 <textarea class="form-control" id="content" name="content" rows="6" width="50%"/>
@@ -35,13 +35,14 @@
         </form>
     </div>
     <br/>
-    <form th:if="${ticket.status} == '1'" class="form-horizontal" th:action="@{/changeTicketStatusByAdmin}" method="post">
+    <form class="form-horizontal" th:action="@{/changeTicketStatusByAdmin}" method="post">
         <input type="hidden" id="ticketId" name="ticketId" th:value="${ticket.id}"/>
         <input type="hidden" id="currentStatus" name="currentStatus" th:value="${ticket.status}"/>
-        <button type="submit" class="btn btn-success">Zamknij zgłoszenie</button>
+        <button th:if="${ticket.status} == '1'" type="submit" class="btn btn-success">Zamknij zgłoszenie</button>
+        <button th:if="${ticket.status} == '2'" type="submit" class="btn btn-danger">Otwórz zgłoszenie</button>
     </form>
     <br/>
-    <a href="/myTickets" class="btn btn-warning" role="button">Powrót do listy</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageTickets" class="btn btn-warning" role="button">Powrót do listy</a>
 </div>
 <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>

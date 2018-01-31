@@ -5,6 +5,8 @@ import eu.replin.helpdesk.utils.RoleRepository;
 import eu.replin.helpdesk.domain.User;
 import eu.replin.helpdesk.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.HashSet;
 
 @Service("userService")
 public class UserService {
+
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -25,6 +28,11 @@ public class UserService {
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User findLoggedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return findUserByEmail(authentication.getName());
     }
 
     public void saveUser(User user) {

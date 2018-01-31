@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- <div th:replace="fragments/header :: head"></div> -->
+<head>
+    <th:block th:include="fragments/header :: head"></th:block>
+
+    <title>Strona główna</title>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header('index')"></th:block>
+
+<div class="container vertical-center">
+    <h3>Wystąpił błąd serwera...</h3>
+    <p th:utext="${error}"></p>
+    <p th:utext="${message}"></p>
+    <a href="/" class="btn btn-danger" role="button">Powrót na stronę główną</a>
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

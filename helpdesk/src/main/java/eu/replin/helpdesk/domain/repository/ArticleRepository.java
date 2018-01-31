@@ -1,6 +1,7 @@
 package eu.replin.helpdesk.domain.repository;
 
 import eu.replin.helpdesk.domain.Article;
+import eu.replin.helpdesk.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,14 +16,18 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
 
     ArrayList<Article> findAllByTitleIsNotNull();
 
+    ArrayList<Article> findAllByCategoryId(int id);
+
+    ArrayList<Article> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String text1, String text2);
 
     Article findArticleById(int id);
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE Article a SET a.title = :title, a.content = :content WHERE a.id = :article_id")
+    @Query("UPDATE Article a SET a.title = :title, a.content = :content, a.category = :category WHERE a.id = :article_id")
     int updateArticle(@Param("title") String title,
                       @Param("content") String content,
+                      @Param("category") Category category,
                       @Param("article_id") int articleId);
 
     @Transactional
@@ -30,6 +35,7 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
 
     @Query("SELECT count(a.id) FROM Article a")
     int selectCountOfAll();
+
 
 
 }

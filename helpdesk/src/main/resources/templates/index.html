@@ -10,21 +10,13 @@
 <th:block th:replace="fragments/header :: header('index')"></th:block>
 
 <div class="container">
-    <div class="alert alert-success" th:if="${saveTicketSuccess}">
-        <strong>Informacja: </strong> Artykuł został zapisany poprawnie!
-    </div>
-    <div class="alert alert-success" th:if="${saveArticleSuccess}">
-        <strong>Informacja: </strong> Artykuł został zapisany poprawnie!
-    </div>
-    <div class="alert alert-success" th:if="${saveCategorySuccess}">
-        <strong>Informacja: </strong> Kategoria została zapisana poprawnie!
-    </div>
+
+
+
     <div class="alert alert-info" th:if="${logoutSuccess}">
         <strong>Informacja: </strong> Zostałeś wylogowany z serwisu!
     </div>
-    <div class="alert alert-success" th:if="${loginSuccess}">
-        <strong>Informacja: </strong> Zostałeś poprawnie zalogowany!
-    </div>
+
     <div class="alert alert-success" th:if="${registerSuccess}">
         <strong>Informacja: </strong> Zostałeś poprawnie zarejestrowany!
     </div>
@@ -60,7 +52,6 @@
         </tr>
         </tbody>
     </table>
-    <div align="right">Nie widać danych? <a href="/" class="btn btn-warning" role="button">Odśwież stronę</a></div>
 </div>
 
 <th:block th:replace="fragments/footer :: footer"></th:block>

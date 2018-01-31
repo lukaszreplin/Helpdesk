@@ -20,8 +20,7 @@ public class TicketService {
     TicketRepository ticketRepository;
 
     public void saveTicket(Ticket ticket) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(authentication.getName());
+        User user = userService.findLoggedUser();
         ticket.setUser(user);
         ticket.setStatus(1);
         ticketRepository.save(ticket);
@@ -50,5 +49,18 @@ public class TicketService {
 
     public Ticket getTicket(int id) {
         return ticketRepository.findById(id);
+    }
+
+    public void changeStatus(int id, int status) {
+        Ticket ticket = getTicket(id);
+        switch (status) {
+            case 1:
+                ticket.setStatus(2);
+                break;
+            case 2:
+                ticket.setStatus(1);
+                break;
+        }
+        ticketRepository.save(ticket);
     }
 }

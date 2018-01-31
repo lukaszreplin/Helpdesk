@@ -1,4 +1,4 @@
-package eu.replin.helpdesk.controllers.KnowledgeBase;
+package eu.replin.helpdesk.controllers.knowledgeBase;
 
 
 import eu.replin.helpdesk.domain.Article;
@@ -67,7 +67,7 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "/editArticle", method = RequestMethod.POST)
-    public String saveArticleFromEdit(Model model, @Valid @ModelAttribute("vehicle") Article article, BindingResult bindingResult) {
+    public String saveArticleFromEdit(RedirectAttributes redirectAttributes, Model model, @Valid @ModelAttribute("vehicle") Article article, BindingResult bindingResult) {
         if (bindingResult.hasErrors() || article.getContent().equals("") || article.getTitle().equals("")) {
             List<String> lista = new ArrayList<>();
             bindingResult.getAllErrors().forEach(error ->{
@@ -79,10 +79,9 @@ public class ArticleController {
             model.addAttribute("errorList", lista);
             return "/knowledgebase/articleForm";
         }
-        System.out.println("id w kontrolerze: " + article.getId());
         articleService.updateArticle(article);
-        model.addAttribute("saveArticleSuccess", true);
-        return "index";
+        redirectAttributes.addFlashAttribute("saveArticleSuccess", true);
+        return "redirect:/knowledgeBase";
     }
 
     @ModelAttribute("articleCategories")

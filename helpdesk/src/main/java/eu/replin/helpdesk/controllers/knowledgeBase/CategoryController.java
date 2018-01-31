@@ -1,4 +1,4 @@
-package eu.replin.helpdesk.controllers.KnowledgeBase;
+package eu.replin.helpdesk.controllers.knowledgeBase;
 
 import eu.replin.helpdesk.domain.Category;
 import eu.replin.helpdesk.services.CategoryService;
@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
-    public String afterAddCategory(Model model, @Valid Category category, BindingResult bindingResult) {
+    public String afterAddCategory(RedirectAttributes redirectAttributes, Model model, @Valid Category category, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> lista = new ArrayList<>();
             bindingResult.getAllErrors().forEach(error -> {
@@ -49,8 +50,8 @@ public class CategoryController {
             return "knowledgebase/categoryForm";
         }
         categoryService.saveCategory(category);
-        model.addAttribute("saveCategorySuccess", true);
-        return "index";
+        redirectAttributes.addFlashAttribute("saveCategorySuccess", true);
+        return "redirect:/categories";
     }
 
     @RequestMapping(value = "/editCategory")
@@ -62,7 +63,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/editCategory", method = RequestMethod.POST)
-    public String saveCategoryFromEdit(Model model, @Valid Category category, BindingResult bindingResult) {
+    public String saveCategoryFromEdit(RedirectAttributes redirectAttributes, Model model, @Valid Category category, BindingResult bindingResult) {
         if (bindingResult.hasErrors() || category.getName().equals("")) {
             List<String> lista = new ArrayList<>();
             bindingResult.getAllErrors().forEach(error ->{
@@ -76,8 +77,8 @@ public class CategoryController {
         }
         System.out.println("id w kontrolerze: " + category.getId());
         categoryService.updateCategory(category);
-        model.addAttribute("saveCategorySuccess", true);
-        return "index";
+        redirectAttributes.addFlashAttribute("saveCategorySuccess", true);
+        return "redirect:/categories";
     }
 
 }

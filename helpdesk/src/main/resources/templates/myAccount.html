@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!-- <div th:replace="fragments/header :: head"></div> -->
+<head>
+    <th:block th:include="fragments/header :: head"></th:block>
+
+    <title>Moje konto</title>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header('myaccount')"></th:block>
+
+<div class="container">
+    <div class="alert alert-success" th:if="${loginSuccess}">
+        <strong>Informacja: </strong> Zostałeś poprawnie zalogowany!
+    </div>
+    <h3>HelpDesk System - moje konto</h3>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>Imię:</dt><dd th:text="${firstname}"></dd>
+        <dt>Nazwisko:</dt><dd th:text="${lastname}"></dd>
+        <dt>E-mail:</dt><dd th:text="${email}"></dd>
+        <dt>Liczba zgłoszeń:</dt><dd th:text="${ticketsQty}"></dd>
+    </dl>
+    <a href="/" class="btn btn-warning" role="button">Powrót na stronę główną</a>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

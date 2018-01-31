@@ -27,6 +27,10 @@ public class ArticleService {
         return articleRepository.findArticleById(id);
     }
 
+    public ArrayList<Article> getSearchArticle(String text) {
+        return articleRepository.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(text, text);
+    }
+
     public void saveArticle(Article article) {
         System.out.println("zapisano artykuł...");
         articleRepository.save(article);
@@ -36,7 +40,7 @@ public class ArticleService {
         System.out.println("tytul: " + article.getTitle());
         System.out.println("tekst: " + article.getContent());
         System.out.println("id: " + article.getId());
-        int a = articleRepository.updateArticle(article.getTitle(), article.getContent(), article.getId());
+        int a = articleRepository.updateArticle(article.getTitle(), article.getContent(), article.getCategory(), article.getId());
         System.out.println(a);
     }
 

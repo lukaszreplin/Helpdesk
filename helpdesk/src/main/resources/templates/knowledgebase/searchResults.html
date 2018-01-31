@@ -10,23 +10,12 @@
 <th:block th:replace="fragments/header :: header('kbase')"></th:block>
 
 <div class="container">
-    <div class="alert alert-success" th:if="${saveArticleSuccess}">
-        <strong>Informacja: </strong> Artykuł został zapisany poprawnie!
+
+    <h3>Baza wiedzy - wyniki wyszukiwania</h3>
+    <div class="alert alert-danger" th:if="${#lists.isEmpty(articles)}">
+        Brak wyników wyszukiwania!
     </div>
-    <h3>Baza wiedzy - lista artykułów</h3>
-    <button class="btn btn-default" data-toggle="collapse" data-target="#searchForm">Wyszukiwanie</button>
-    <br/>
-    <br/>
-    <div id="searchForm" class="collapse">
-        <form class="form-horizontal" th:action="@{/knowledgeBase}" method="post">
-            <div class="form-group">
-                <input type="text" class="form-control" id="search" name="search"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Wyszukaj</button>
-        </form>
-    </div>
-    <br/>
-    <table class="table table-condensed">
+    <table th:if="${not #lists.isEmpty(articles)}" class="table table-condensed">
         <thead>
         <tr>
             <th>Nazwa artykułu</th>
@@ -44,6 +33,7 @@
         </tr>
         </tbody>
     </table>
+    <a href="/knowledgeBase" class="btn btn-warning" role="button">Powrót</a>
 </div>
 <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
