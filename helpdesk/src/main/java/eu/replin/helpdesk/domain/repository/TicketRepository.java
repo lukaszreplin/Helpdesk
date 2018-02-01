@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,10 @@ import java.util.List;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     public ArrayList<Ticket> findAllBySubjectIsNotNull();
+
+    public ArrayList<Ticket> findAllByOrderByIdDesc();
+
+    public ArrayList<Ticket> findAllByOrderByIdAsc();
 
     public ArrayList<Ticket> findByUser(User user);
 

@@ -1,5 +1,8 @@
 package eu.replin.helpdesk.domain;
 
+import com.sun.istack.internal.Nullable;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -20,8 +23,10 @@ public class Ticket {
     @Column(name = "subject")
     private String subject;
 
-    @Column(name = "status")
-    private int status;
+    @Valid
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "status_id", nullable = false)
+    private Status status;
     /*
     1 - otwarty
     2 - zamknięty
@@ -30,8 +35,14 @@ public class Ticket {
     private String content;
 
 
-    @Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
+    //@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
+    @CreationTimestamp
+    @Column(name = "createdDate")
     private Date createdDate;
+
+    @UpdateTimestamp
+    @Column(name = "modifiedDate")
+    private Date updatedDate;
 
 
     @Valid
@@ -58,11 +69,11 @@ public class Ticket {
         this.subject = subject;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -82,6 +93,14 @@ public class Ticket {
         this.createdDate = createdDate;
     }
 
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
     public User getUser() {
         return user;
     }
@@ -90,8 +109,10 @@ public class Ticket {
         this.user = user;
     }
 
-    @PrePersist
-    void onCreate() {
-        this.setCreatedDate(new Timestamp((new Date()).getTime()));
-    }
+//    @PrePersist
+//    void onCreate() {
+//        this.setCreatedDate(new Timestamp((new Date()).getTime()));
+//    }
+
+
 }

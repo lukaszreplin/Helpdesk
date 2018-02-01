@@ -1,9 +1,11 @@
 package eu.replin.helpdesk.domain;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import java.util.Date;
 
 @Entity
 @Table(name = "articles")
@@ -26,6 +28,15 @@ public class Article {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    @CreationTimestamp
+    @Column(name = "createdDate")
+    private Date createdDate;
+
+    @Valid
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User user;
 
     public Article() {
     }
@@ -60,5 +71,21 @@ public class Article {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

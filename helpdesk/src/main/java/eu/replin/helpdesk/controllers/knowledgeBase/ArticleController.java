@@ -67,7 +67,7 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "/editArticle", method = RequestMethod.POST)
-    public String saveArticleFromEdit(RedirectAttributes redirectAttributes, Model model, @Valid @ModelAttribute("vehicle") Article article, BindingResult bindingResult) {
+    public String saveArticleFromEdit(RedirectAttributes redirectAttributes, Model model, @Valid @ModelAttribute("article") Article article, BindingResult bindingResult) {
         if (bindingResult.hasErrors() || article.getContent().equals("") || article.getTitle().equals("")) {
             List<String> lista = new ArrayList<>();
             bindingResult.getAllErrors().forEach(error ->{

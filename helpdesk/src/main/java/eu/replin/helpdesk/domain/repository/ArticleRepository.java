@@ -14,7 +14,13 @@ import java.util.ArrayList;
 @Repository("article_repository")
 public interface ArticleRepository extends JpaRepository<Article, String> {
 
-    ArrayList<Article> findAllByTitleIsNotNull();
+    ArrayList<Article> findAll();
+
+    ArrayList<Article> findAllByOrderByTitleAsc();
+
+    ArrayList<Article> findAllByOrderByTitleDesc();
+
+    ArrayList<Article> findAllByOrderByIdDesc();
 
     ArrayList<Article> findAllByCategoryId(int id);
 

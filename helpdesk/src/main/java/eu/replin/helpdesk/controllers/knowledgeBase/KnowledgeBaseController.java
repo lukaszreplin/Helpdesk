@@ -23,9 +23,10 @@ public class KnowledgeBaseController {
     CategoryService categoryService;
 
     @RequestMapping("/knowledgeBase")
-    public String getArticles(Model model) {
-        List<Article> articles = articleService.getAllArticle();
-        System.out.println(articles.toString());
+    public String getArticles(@RequestParam(value = "sorter", required = false, defaultValue = "0") String sorter , Model model) {
+        List<Article> articles = articleService.getAllArticle(sorter);
+        System.out.println(sorter);
+        model.addAttribute("activeSorter", sorter);
         model.addAttribute("articles", articles);
         return "/knowledgebase/knowledgeBase";
     }

@@ -10,25 +10,43 @@
 <th:block th:replace="fragments/header :: header('managetickets')"></th:block>
 
 <div class="container">
-    <h3>System zgłoszeń - moje zgłoszenia</h3>
-    <table class="table table-condensed">
+    <h3>System zgłoszeń - zarządzanie zgłoszeniami</h3>
+    <br/>
+    <form class="form-horizontal" th:action="@{/manageTickets}">
+        <div class="form-group">
+            <div class="col-xs-4">
+                <select class="form-control" id="sorter" name="sorter">
+                    <option th:selected="${activeSorter == '0'}? 'true' : 'false'" value="0">Od najstarszych (domyślne)</option>
+                    <option th:selected="${activeSorter == '1'}? 'true' : 'false'" value="1">Od najnowszych</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Sortuj</button>
+        </div>
+
+    </form>
+    <br/>
+    <table class="table">
         <thead>
         <tr>
+            <th>Numer</th>
             <th>Temat</th>
             <th>Data dodania</th>
             <th>Status</th>
             <th>Kto założył</th>
+            <th>Data modyfikacji</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:class="${ticket.status == 1}? 'danger' : 'success'" th:each=" ticket : ${tickets}">
+        <tr th:class="${ticket.status.name == 'Otwarte'}? 'default' : 'success'" th:each=" ticket : ${tickets}">
+            <td th:text="${ticket.id}"></td>
             <td th:text="${ticket.subject}"></td>
             <td th:text="${ticket.createdDate}"></td>
-            <td th:text="${ticket.status == 1}? 'Otwarte' : 'Zamknięte'"></td>
+            <td th:text="${ticket.status.name}"></td>
             <td><span th:text="${ticket.user.firstname}"></span> <span th:text="${ticket.user.lastname}"></span> </td>
-            <td>
-                <a class="btn btn-info" role="button" th:href="${'/ticketDetails?id='+ticket.id}">Szczegóły</a>
+            <td th:text="${ticket.updatedDate}"></td>
+            <td align="right">
+                <a class="btn btn-primary" role="button" th:href="${'/ticketDetails?id='+ticket.id}">Szczegóły</a>
             </td>
         </tr>
         </tbody>

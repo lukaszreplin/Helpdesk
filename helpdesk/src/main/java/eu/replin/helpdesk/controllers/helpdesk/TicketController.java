@@ -3,6 +3,7 @@ package eu.replin.helpdesk.controllers.helpdesk;
 import eu.replin.helpdesk.domain.Comment;
 import eu.replin.helpdesk.domain.Ticket;
 import eu.replin.helpdesk.services.CommentService;
+import eu.replin.helpdesk.services.EmailService;
 import eu.replin.helpdesk.services.TicketService;
 import eu.replin.helpdesk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class TicketController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    EmailService emailService;
 
 
     @RequestMapping("/addTicket")
@@ -63,8 +67,9 @@ public class TicketController {
     }
 
     @RequestMapping("/manageTickets")
-    public String getAllTickets(Model model) {
-        List<Ticket> tickets = ticketService.getAllTickets();
+    public String getAllTickets(@RequestParam(value = "sorter", required = false, defaultValue = "0") String sorter, Model model) {
+        List<Ticket> tickets = ticketService.getAllTickets(sorter);
+        model.addAttribute("activeSorter", sorter);
         model.addAttribute("tickets", tickets);
         return "tickets/manageTickets";
     }
@@ -118,9 +123,22 @@ public class TicketController {
     }
 
     @RequestMapping(value = "/changeTicketStatusByAdmin", method = RequestMethod.POST)
-    public String changeTicketStatusByAdmin(@RequestParam("ticketId") int id, @RequestParam("currentStatus") int status, Model model) {
-        ticketService.changeStatus(id, status);
+    public String changeTicketStatusByAdmin(@RequestParam("ticketId") int id,
+                                            @RequestParam("currentStatus") String status,
+                                            @RequestParam("sendMail") int sendMail, Model model) {
+        ticketService.changeStatus(id, Integer.parseInt(status), sendMail);
+//        emailService.sendSimpleMessage("lukasz@replin.eu", "Test", "" +
+//                "<html><body><h1>Status <b>Twojego</b> zgłoszenia został zmieniony!</h1></body></html>");
         return "redirect:/ticketDetails?id=" + id;
+    }
+
+    @RequestMapping(value = "/changeTicketStatusByUser", method = RequestMethod.POST)
+    public String changeTicketStatusByUser(@RequestParam("ticketId") int id,
+                                            @RequestParam("currentStatus") String status, Model model) {
+        ticketService.changeStatus(id, Integer.parseInt(status), 1);
+//        emailService.sendSimpleMessage("lukasz@replin.eu", "Test", "" +
+//                "<html><body><h1>Status <b>Twojego</b> zgłoszenia został zmieniony!</h1></body></html>");
+        return "redirect:/ticket?id=" + id;
     }
 
 

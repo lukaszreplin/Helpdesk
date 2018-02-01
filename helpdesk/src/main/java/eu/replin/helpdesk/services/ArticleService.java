@@ -2,6 +2,7 @@ package eu.replin.helpdesk.services;
 
 import eu.replin.helpdesk.domain.Article;
 import eu.replin.helpdesk.domain.Category;
+import eu.replin.helpdesk.domain.User;
 import eu.replin.helpdesk.domain.repository.ArticleRepository;
 import eu.replin.helpdesk.domain.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,36 @@ import java.util.List;
 public class ArticleService {
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     private ArticleRepository articleRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public ArrayList<Article> getAllArticle() { ;
-        return new ArrayList<Article>(articleRepository.findAllByTitleIsNotNull());
+    public ArrayList<Article> getAllArticle(String sorter) {
+        ArrayList<Article> articles = null;
+        switch (sorter) {
+            case "0":
+                articles = articleRepository.findAll();
+                break;
+            case "1":
+                articles = articleRepository.findAllByOrderByIdDesc();
+                break;
+            case "2":
+                articles = articleRepository.findAllByOrderByTitleAsc();
+                break;
+            case "3":
+                articles = articleRepository.findAllByOrderByTitleDesc();
+                break;
+            default:
+                articles = articleRepository.findAll();
+                break;
+        }
+        return articles;
     }
+
 
     public Article getArticle(int id) {
         return articleRepository.findArticleById(id);
@@ -32,7 +55,8 @@ public class ArticleService {
     }
 
     public void saveArticle(Article article) {
-        System.out.println("zapisano artykuł...");
+        User user = userService.findLoggedUser();
+        article.setUser(user);
         articleRepository.save(article);
     }
 

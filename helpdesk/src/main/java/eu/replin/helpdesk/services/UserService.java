@@ -43,4 +43,20 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public boolean checkPassword(String password) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user =  findUserByEmail(authentication.getName());
+        if (user.getPassword().equals(bCryptPasswordEncoder.encode(password))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void changePassword(String newpwd) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user =  findUserByEmail(authentication.getName());
+        user.setPassword(bCryptPasswordEncoder.encode(newpwd));
+    }
+
 }

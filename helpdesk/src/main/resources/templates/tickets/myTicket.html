@@ -10,21 +10,24 @@
     <th:block th:replace="fragments/header :: header('mytickets')"></th:block>
 
 <div class="container">
-    <h3>Zgłoszenie - szczegóły</h3>
-    <h3 th:text="${ticket.subject}"></h3>
+    <h3>Zgłoszenie nr <span th:text="${ticket.id}"></span> - szczegóły</h3>
+    <h4 th:if="${ticket.status.id} == '1'"><span class="label label-success">OTWARTE</span></h4>
+    <h4 th:if="${ticket.status.id} == '2'"><span class="label label-danger">ZAMKNIĘTE</span></h4>
+    <h3><b>Tytuł:</b> <span th:text="${ticket.subject}"></span></h3>
     <blockquote>
+        <h5><b>Treść zgłoszenia:</b></h5>
         <p th:text="${ticket.content}"></p>
     </blockquote>
-    <h4>Dyskusja</h4>
-    <div th:each=" comment : ${comments}">
-        <p th:text="${comment.content}"></p>
-        <h6>Dodany przez <span th:text="${comment.user.firstname}"></span> <span th:text="${comment.user.lastname}"></span>
-            <span th:text="${comment.createdDate}"></span></h6>
+    <h4><b>Dyskusja</b></h4>
+    <div class="panel panel-default" th:each=" comment : ${comments}">
+        <div class="panel-body"><p th:text="${comment.content}"></p></div>
+        <div class="panel-footer"><h6><b>Dodany przez</b> <span th:text="${comment.user.firstname}"></span> <span th:text="${comment.user.lastname}"></span>
+            <span th:text="${comment.createdDate}"></span></h6></div>
     </div>
-    <button th:if="${ticket.status} == '1'" class="btn btn-default" data-toggle="collapse" data-target="#commentForm">Dodaj komentarz</button>
+    <button th:if="${ticket.status.id} == '1'" class="btn btn-primary" data-toggle="collapse" data-target="#commentForm">Dodaj komentarz</button>
     <br/>
     <br/>
-    <div th:if="${ticket.status} == '1'" id="commentForm" class="collapse">
+    <div th:if="${ticket.status.id} == '1'" id="commentForm" class="collapse">
         <form class="form-horizontal" th:action="@{/ticket}" method="post">
             <div class="form-group">
                 <label for="content">Treść odpowiedzi</label>
@@ -33,15 +36,15 @@
             <input type="hidden" id="ticketId" name="ticketId" th:value="${ticket.id}"/>
             <button type="submit" class="btn btn-primary">Zapisz</button>
         </form>
+        <br/>
     </div>
-    <br/>
-    <form th:if="${ticket.status} == '1'" class="form-horizontal" th:action="@{/changeTicketStatusByAdmin}" method="post">
+    <form th:if="${ticket.status.id} == '1'" class="form-horizontal" th:action="@{/changeTicketStatusByUser}" method="post">
         <input type="hidden" id="ticketId" name="ticketId" th:value="${ticket.id}"/>
-        <input type="hidden" id="currentStatus" name="currentStatus" th:value="${ticket.status}"/>
-        <button type="submit" class="btn btn-success">Zamknij zgłoszenie</button>
+        <input type="hidden" id="currentStatus" name="currentStatus" th:value="${ticket.status.id}"/>
+        <button type="submit" class="btn btn-primary">Zamknij zgłoszenie</button>
     </form>
     <br/>
-    <a href="/myTickets" class="btn btn-warning" role="button">Powrót do listy</a>
+    <a href="/myTickets" class="btn btn-primary" role="button">Powrót do listy</a>
 </div>
 <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>

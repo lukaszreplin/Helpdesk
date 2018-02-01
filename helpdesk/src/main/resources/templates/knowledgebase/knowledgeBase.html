@@ -16,31 +16,55 @@
     <h3>Baza wiedzy - lista artykułów</h3>
     <button class="btn btn-default" data-toggle="collapse" data-target="#searchForm">Wyszukiwanie</button>
     <br/>
-    <br/>
+
     <div id="searchForm" class="collapse">
         <form class="form-horizontal" th:action="@{/knowledgeBase}" method="post">
             <div class="form-group">
+                <div class="col-xs-4">
+                    <br/>
                 <input type="text" class="form-control" id="search" name="search"/>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Wyszukaj</button>
         </form>
     </div>
     <br/>
-    <table class="table table-condensed">
+    <form class="form-horizontal" th:action="@{/knowledgeBase}">
+        <div class="form-group">
+            <div class="col-xs-4">
+            <select class="form-control" id="sorter" name="sorter">
+                <option th:selected="${activeSorter == '0'}? 'true' : 'false'" value="0">Od najstarszych (domyślne)</option>
+                <option th:selected="${activeSorter == '1'}? 'true' : 'false'" value="1">Od najnowszych</option>
+                <option th:selected="${activeSorter == '2'}? 'true' : 'false'" value="2" >Po tytule rosnąco</option>
+                <option th:selected="${activeSorter == '3'}? 'true' : 'false'" value="3" >Po tytule malejącoo</option>
+            </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Sortuj</button>
+        </div>
+
+    </form>
+    <br/>
+    <table class="table">
         <thead>
         <tr>
             <th>Nazwa artykułu</th>
-            <th sec:authorize="hasAuthority('ADMIN')" ></th>
+            <th>Kategoria</th>
+            <th sec:authorize="hasAuthority('ADMIN')">Dodał</th>
+            <th sec:authorize="hasAuthority('ADMIN')">Data dodania</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each=" article : ${articles}">
             <td th:text="${article.title}"></td>
-            <td>
-            <a class="btn btn-info" role="button" th:href="${'/article?id='+article.id}">Podgląd</a>
+            <td th:text="${article.category.name}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><span th:text="${article.user.firstname}"></span> <span th:text="${article.user.lastname}"></span> </td>
+            <td sec:authorize="hasAuthority('ADMIN')" th:text="${article.createdDate}"></td>
+            <td align="right">
+                <a class="btn btn-info" role="button" th:href="${'/article?id='+article.id}">Podgląd</a>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="${'/editArticle?id='+article.id}" class="btn btn-warning" role="button">Edycja</a>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="${'/deleteArticle?id='+article.id}" class="btn btn-danger" role="button">Usuń</a>
             </td>
-            <td sec:authorize="hasAuthority('ADMIN')" ><a th:href="${'/editArticle?id='+article.id}" class="btn btn-warning" role="button">Edycja</a></td>
-            <td sec:authorize="hasAuthority('ADMIN')" ><a th:href="${'/deleteArticle?id='+article.id}" class="btn btn-danger" role="button">Usuń</a></td>
         </tr>
         </tbody>
     </table>

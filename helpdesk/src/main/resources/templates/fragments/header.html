@@ -4,11 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
-    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<nav class="navbar navbar-inverse" style="margin-bottom:0px; border-radius:0px;" th:fragment="header(activeTab)">
+<nav class="navbar navbar-default" style="margin-bottom:0px; border-radius:0px;" th:fragment="header(activeTab)">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">HelpDesk</a>
@@ -23,7 +23,8 @@
                 </ul>
             </li>
             <li th:class="${activeTab == 'kbase'}? 'active' : null"><a href="/knowledgeBase">Baza wiedzy</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" th:class="${activeTab == 'addArticle' || activeTab == 'managetickets' || activeTab == 'categories'}? 'dropdown active' : 'dropdown'"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrator <span class="caret"></span></a>
+            <li sec:authorize="hasAuthority('ADMIN')" th:class="${activeTab == 'addArticle' || activeTab == 'managetickets' || activeTab == 'categories'}? 'dropdown active' : 'dropdown'">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrator <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li th:class="${activeTab == 'addArticle'}? 'active' : null"><a href="/addArticle">Dodaj artykuł do bazy wiedzy</a></li>
                     <li th:class="${activeTab == 'categories'}? 'active' : null"><a href="/categories">Zarządzanie kategoriami artykułów</a></li>
@@ -40,7 +41,7 @@
         </div>
         <div sec:authorize="isAuthenticated()">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span>
+            <li><a href="/myAccount"><span class="glyphicon glyphicon-user"></span>
                 <span sec:authentication="name"></span></a></li>
             <li><a href="javascript: document.logoutForm.submit()"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>
             <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
@@ -50,6 +51,5 @@
         </div>
     </div>
 </nav>
-
 </body>
 </html>
